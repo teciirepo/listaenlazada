@@ -23,7 +23,7 @@ int search(student st[],char id[], int itemcount);
 void clean(student st[],int deleteitem);
 void displayheading();
 
-//function to display a menu of choices
+//funcion para mostrar el menu
 void displaymenu(){
 printf("==================================================\n");
 printf("                      MENU \n");
@@ -37,7 +37,7 @@ printf("==================================================\n");
 printf(" 4.buscar alumno por id\n");
 printf("==================================================\n");
 }
-//function to append a new record
+//funcion para agregar un nuevo registro
 void add_rec(student st[],int *itemcount){
 
 again:
@@ -75,7 +75,7 @@ st[*itemcount].assigment+st[*itemcount].midterm+st[*itemcount].final)/5;
 
 }
 
-//function to find the location of the record
+//funcion de busqueda
 int search(student st[], char id[],int itemcount){
 int found =-1,i;
 
@@ -92,7 +92,7 @@ return found;
 
 
 
-//function to view all records
+//funcion para ver todos los registros
 void viewall(student st[], int itemcount){
 int i=0;
 displayheading();
@@ -126,20 +126,20 @@ printf("ID NOMBRE             No.Control       SEXO     CARRERA           P1   P
 printf("===================================================================================================\n");
 }
 
-//function to delete record
+//funcion para borrar registro
 void delete_rec(student st[], int *itemcount)
 {
 char id[10];
 int index,i;
 if (*itemcount > 0)
 {
-printf("Enter student's ID:");
+printf("ingresa el id del sistema:");
 scanf("%s",id);
 index = search(st, id,*itemcount);
 
 if ((index!=-1) && (*itemcount != 0))
 {
-if (index == (*itemcount-1)) //delete the last record
+if (index == (*itemcount-1)) //elimina el ultimo registro
 {
 
 clean(st, index);
@@ -147,7 +147,7 @@ clean(st, index);
 
 printf("The record was deleted.\n");
 }
-else //delete the first or middle record
+else //elimina el primer o el registro de en medio de la lista 
 {
 for (i = index; i < *itemcount-1; i++)
 {
@@ -159,14 +159,14 @@ clean(st, *itemcount);
 }
 
 }
-else printf("The record doesn't exist.Check the ID and try again.\n");
+else printf("este registro no existe.comprueba el id del alumno.\n");
 
 
 }
-else printf("No record to delete\n");
+else printf("no hay registro para eliminar\n");
 }
 
-//function to clean deleted record
+//funcion para limpiar el registro del alumno
 void clean(student st[],int index)
 {
 strcpy(st[index].stnumber,"");
@@ -190,7 +190,7 @@ st[index].total = 0;
 
 
 
-//function to find record
+//funcion para encontrar registro
 void find(student st[], int itemcount)
 {
 char id[10];
@@ -199,7 +199,7 @@ scanf("%s",&id);
 
 int index=search(st,id,itemcount);
 if (index != -1)
-{ //display the found record
+{ //desplegar registros encontrados
 displayheading();
 printf("%-5s",st[index].stnumber);
 printf("%-17s",st[index].stname);
@@ -215,7 +215,7 @@ printf("%-4.1f",st[index].total);
 printf("\n");
 
 }
-else printf("The record doesn't exits.\n");
+else printf("el registro no existe.\n");
 
 }
 
@@ -225,7 +225,7 @@ else printf("The record doesn't exits.\n");
 
 
 
-//the main function
+//funcion principal
 
 int main(int argc, char *argv[])
 {
@@ -234,13 +234,13 @@ int main(int argc, char *argv[])
 student st[20];
 int itemcount=0;
 
-//show menu
+//mostrar menu
 displaymenu();
 int yourchoice;
 char confirm;
 do
 {
-printf("Enter your choice(1-4):");
+printf("ingresa tu opcion(1-4):");
 scanf("%d",&yourchoice);
 
 switch(yourchoice){
@@ -252,10 +252,10 @@ case 3:viewall(st, itemcount);
 	break;
 case 4:find(st, itemcount);
 	break;
-default:printf("invalid\n");
+default:printf("invalido\n");
 }
 
-printf("Press y or Y to continue:");
+printf("presiona y o Y para continuar:");
 scanf("%s",&confirm);
 }
 while(confirm=='y'||confirm=='Y');
