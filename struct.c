@@ -7,6 +7,7 @@ typedef struct
 
 char stnumber[10];
 char stname[20];
+char numcontrol[13];
 char sex;
 char carrera[20];
 float quizz1;
@@ -27,20 +28,20 @@ void displaymenu(){
 printf("==================================================\n");
 printf("                      MENU \n");
 printf("==================================================\n");
-printf(" 1.Add student records\n");
+printf(" 1.ingresar datos del alumno\n");
 printf("==================================================\n");
-printf(" 2.Delete student records\n");
+printf(" 2.eliminar datos del alumno\n");
 printf("==================================================\n");
-printf(" 4.View all student records\n");
+printf(" 3.ver todos los registros\n");
 printf("==================================================\n");
-printf(" 8.Find a student by ID\n");
+printf(" 4.buscar alumno por id\n");
 printf("==================================================\n");
 }
 //function to append a new record
 void add_rec(student st[],int *itemcount){
 
 again:
-printf("\nEnter student's ID:");
+printf("\ningresa id del alumno:");
 scanf("%s",&st[*itemcount].stnumber);
 if(search(st,st[*itemcount].stnumber,*itemcount)!=-1)
 {
@@ -48,24 +49,26 @@ printf("This ID already exists\n");
 goto again;
 }
 
-printf("Enter student's Name:");
+printf("ingresa el nombre del estudiante:");
 scanf("%s",&st[*itemcount].stname);
-printf("Enter student's Sex(F or M):");
+printf("ingresa el numero de control:");
+scanf("%s",&st[*itemcount].numcontrol);
+printf("ingresa el sexo del estudiante(F o M):");
 scanf("%s",&st[*itemcount].sex);
 printf("ingresa carrera del alumno:");
 scanf("%s",&st[*itemcount].carrera);
-printf("Enter student's quizz1 score:");
+printf("ponderacion de la primera unidad:");
 scanf("%f",&st[*itemcount].quizz1);
-printf("Enter student's quizz2 score:");
+printf("ponderacion de la segunda unidad:");
 scanf("%f",&st[*itemcount].quizz2);
-printf("Enter student's assigment score:");
+printf("ponderacion de la tercera unidad:");
 scanf("%f",&st[*itemcount].assigment);
-printf("Enter student's mid term score:");
+printf("ponderacion de la cuarta unidad:");
 scanf("%f",&st[*itemcount].midterm);
-printf("Enter student's final score:");
+printf("ponderacion de la quinta unidad:");
 scanf("%f",&st[*itemcount].final);
-st[*itemcount].total=st[*itemcount].quizz1+st[*itemcount].quizz2+
-st[*itemcount].assigment+st[*itemcount].midterm+st[*itemcount].final;
+st[*itemcount].total=(st[*itemcount].quizz1+st[*itemcount].quizz2+
+st[*itemcount].assigment+st[*itemcount].midterm+st[*itemcount].final)/5;
 
 ++(*itemcount);
 
@@ -99,6 +102,7 @@ if(st[i].stnumber!="")
 {
 printf("%-2s",st[i].stnumber);
 printf("%-17s",st[i].stname);
+printf("%-13s",st[i].numcontrol);
 printf("%-5c",st[i].sex);
 printf("%-17s",st[i].carrera);
 printf("%-6.1f",st[i].quizz1);
@@ -118,8 +122,8 @@ i=i+1;
 
 void displayheading()
 {
-printf("ID NAME         SEX     CARRERA           Q1   Q2    As    Mi   Fi   TOTAL \n");
-printf("==========================================================================\n");
+printf("ID NAME             No.Control       SEX     CARRERA           Q1   Q2    As    Mi   Fi   TOTAL \n");
+printf("================================================================================================\n");
 }
 
 //function to delete record
@@ -167,6 +171,7 @@ void clean(student st[],int index)
 {
 strcpy(st[index].stnumber,"");
 strcpy(st[index].stname,"");
+strcpy(st[index].numcontrol,"");
 st[index].sex =NULL;
 strcpy(st[index].carrera,"");
 st[index].quizz1 = 0;
@@ -198,6 +203,7 @@ if (index != -1)
 displayheading();
 printf("%-5s",st[index].stnumber);
 printf("%-17s",st[index].stname);
+printf("%-13s",st[index].numcontrol);
 printf("%-5c",st[index].sex);
 printf("%-17s",st[index].carrera);
 printf("%-6.1f",st[index].quizz1);
