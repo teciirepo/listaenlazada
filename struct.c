@@ -242,7 +242,9 @@ case 1:add_rec(st, &itemcount);
 	break;
 case 2:delete_rec(st, &itemcount);
 	break;
+case 3:viewall(st, itemcount);
 	break;
+case 4:find(st, itemcount);
 	break;
 default:printf("invalid\n");
 }
