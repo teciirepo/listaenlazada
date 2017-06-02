@@ -5,26 +5,26 @@
 typedef struct
 {
 
-char stnumber[10];
-char stname[20];
+char esnum[10];
+char esnombre[20];
 char numcontrol[13];
-char sex;
+char sexo;
 char carrera[20];
-float quizz1;
-float quizz2;
-float assigment;
-float midterm;
-float final;
+float exam1;
+float exam2;
+float exam3;
+float exam4;
+float exam5;
 float total;
 
-}student;
+}estudiante;
 //funciones principales
-int search(student st[],char id[], int itemcount);
-void clean(student st[],int deleteitem);
-void displayheading();
+int buscar(estudiante st[],char id[], int contadordeelement);
+void limpiar(estudiante st[],int eliminarelem);
+void formaimprimir();
 
 //funcion para mostrar el menu
-void displaymenu(){
+void mostrarmenu(){
 printf("==================================================\n");
 printf("                      MENU \n");
 printf("==================================================\n");
@@ -38,78 +38,78 @@ printf(" 4.buscar alumno por id\n");
 printf("==================================================\n");
 }
 //funcion para agregar un nuevo registro
-void add_rec(student st[],int *itemcount){
+void agre_regis(estudiante st[],int *contadordeelement){
 
 again:
 printf("\ningresa id del alumno:");
-scanf("%s",&st[*itemcount].stnumber);
-if(search(st,st[*itemcount].stnumber,*itemcount)!=-1)
+scanf("%s",&st[*contadordeelement].esnum);
+if(buscar(st,st[*contadordeelement].esnum,*contadordeelement)!=-1)
 {
 printf("Este id ya existe\n");
 goto again;
 }
 
 printf("ingresa el nombre del estudiante:");
-scanf("%s",&st[*itemcount].stname);
+scanf("%s",&st[*contadordeelement].esnombre);
 printf("ingresa el numero de control:");
-scanf("%s",&st[*itemcount].numcontrol);
+scanf("%s",&st[*contadordeelement].numcontrol);
 printf("ingresa el sexo del estudiante(F o M):");
-scanf("%s",&st[*itemcount].sex);
+scanf("%s",&st[*contadordeelement].sexo);
 printf("ingresa carrera del alumno:");
-scanf("%s",&st[*itemcount].carrera);
+scanf("%s",&st[*contadordeelement].carrera);
 printf("ponderacion de la primera unidad:");
-scanf("%f",&st[*itemcount].quizz1);
+scanf("%f",&st[*contadordeelement].exam1);
 printf("ponderacion de la segunda unidad:");
-scanf("%f",&st[*itemcount].quizz2);
+scanf("%f",&st[*contadordeelement].exam2);
 printf("ponderacion de la tercera unidad:");
-scanf("%f",&st[*itemcount].assigment);
+scanf("%f",&st[*contadordeelement].exam3);
 printf("ponderacion de la cuarta unidad:");
-scanf("%f",&st[*itemcount].midterm);
+scanf("%f",&st[*contadordeelement].exam4);
 printf("ponderacion de la quinta unidad:");
-scanf("%f",&st[*itemcount].final);
-st[*itemcount].total=(st[*itemcount].quizz1+st[*itemcount].quizz2+
-st[*itemcount].assigment+st[*itemcount].midterm+st[*itemcount].final)/5;
+scanf("%f",&st[*contadordeelement].exam5);
+st[*contadordeelement].total=(st[*contadordeelement].exam1+st[*contadordeelement].exam2+
+st[*contadordeelement].exam3+st[*contadordeelement].exam4+st[*contadordeelement].exam5)/5;
 
-++(*itemcount);
+++(*contadordeelement);
 
 
 }
 
 //funcion de busqueda
-int search(student st[], char id[],int itemcount){
-int found =-1,i;
+int buscar(estudiante st[], char id[],int contadordeelement){
+int encontrar =-1,i;
 
-for (i = 0; i < itemcount && found==-1; i++)
+for (i = 0; i < contadordeelement && encontrar==-1; i++)
 {
 
-if (strcmp(st[i].stnumber,id)==0) found=i;
+if (strcmp(st[i].esnum,id)==0) encontrar=i;
 
-else found=-1 ;
+else encontrar=-1 ;
 }
 
-return found;
+return encontrar;
 }
 
 
 
 //funcion para ver todos los registros
-void viewall(student st[], int itemcount){
+void vertodoreg(estudiante st[], int contadordeelement){
 int i=0;
-displayheading();
-while(i<itemcount)
+formaimprimir();
+while(i<contadordeelement)
 {
-if(st[i].stnumber!="")
+if(st[i].esnum!="")
 {
-printf("%-2s",st[i].stnumber);
-printf("%-17s",st[i].stname);
+printf("%-2s",st[i].esnum);
+printf("%-17s",st[i].esnombre);
 printf("%-13s",st[i].numcontrol);
-printf("%-5c",st[i].sex);
+printf("%-5c",st[i].sexo);
 printf("%-17s",st[i].carrera);
-printf("%-6.1f",st[i].quizz1);
-printf("%-6.1f",st[i].quizz2);
-printf("%-6.1f",st[i].assigment);
-printf("%-6.1f",st[i].midterm);
-printf("%-7.1f",st[i]. final);
+printf("%-6.1f",st[i].exam1);
+printf("%-6.1f",st[i].exam2);
+printf("%-6.1f",st[i].exam3);
+printf("%-6.1f",st[i].exam4);
+printf("%-7.1f",st[i]. exam5);
 printf("%-4.1f",st[i].total);
 printf("\n");
 }
@@ -120,40 +120,40 @@ i=i+1;
 
 }
 
-void displayheading()
+void formaimprimir()
 {
-printf("ID NOMBRE             No.Control       SEXO     CARRERA           P1   P2    P3    P4   P5   TOTAL \n");
+printf("ID NOMBRE        No.Control       SEXO     CARRERA           P1   P2    P3    P4   P5   TOTAL \n");
 printf("===================================================================================================\n");
 }
 
 //funcion para borrar registro
-void delete_rec(student st[], int *itemcount)
+void eliminar_regis(estudiante st[], int *contadordeelement)
 {
 char id[10];
 int index,i;
-if (*itemcount > 0)
+if (*contadordeelement > 0)
 {
 printf("ingresa el id del sistema:");
 scanf("%s",id);
-index = search(st, id,*itemcount);
+index = buscar(st, id,*contadordeelement);
 
-if ((index!=-1) && (*itemcount != 0))
+if ((index!=-1) && (*contadordeelement != 0))
 {
-if (index == (*itemcount-1)) //elimina el ultimo registro
+if (index == (*contadordeelement-1)) //elimina el ultimo registro
 {
 
-clean(st, index);
---(*itemcount);
+limpiar(st, index);
+--(*contadordeelement);
 
 printf("The record was deleted.\n");
 }
-else //elimina el primer o el registro de en medio de la lista 
+else //elimina el primer o el registro de en medio de la lista
 {
-for (i = index; i < *itemcount-1; i++)
+for (i = index; i < *contadordeelement-1; i++)
 {
 st[i] = st[i + 1];
-clean(st, *itemcount);
---(*itemcount) ;
+limpiar(st, *contadordeelement);
+--(*contadordeelement) ;
 }
 
 }
@@ -167,18 +167,18 @@ else printf("no hay registro para eliminar\n");
 }
 
 //funcion para limpiar el registro del alumno
-void clean(student st[],int index)
+void limpiar(estudiante st[],int index)
 {
-strcpy(st[index].stnumber,"");
-strcpy(st[index].stname,"");
+strcpy(st[index].esnum,"");
+strcpy(st[index].esnombre,"");
 strcpy(st[index].numcontrol,"");
-st[index].sex =NULL;
+st[index].sexo =NULL;
 strcpy(st[index].carrera,"");
-st[index].quizz1 = 0;
-st[index].quizz2 = 0;
-st[index].assigment = 0;
-st[index].midterm = 0;
-st[index].final = 0;
+st[index].exam1 = 0;
+st[index].exam2 = 0;
+st[index].exam3 = 0;
+st[index].exam4 = 0;
+st[index].exam5 = 0;
 st[index].total = 0;
 
 }
@@ -191,26 +191,26 @@ st[index].total = 0;
 
 
 //funcion para encontrar registro
-void find(student st[], int itemcount)
+void encontrar(estudiante st[], int contadordeelement)
 {
 char id[10];
-printf("Enter student's ID:");
+printf("ingresa id del estudiante:");
 scanf("%s",&id);
 
-int index=search(st,id,itemcount);
+int index=buscar(st,id,contadordeelement);
 if (index != -1)
 { //desplegar registros encontrados
-displayheading();
-printf("%-5s",st[index].stnumber);
-printf("%-17s",st[index].stname);
+formaimprimir();
+printf("%-5s",st[index].esnum);
+printf("%-17s",st[index].esnombre);
 printf("%-13s",st[index].numcontrol);
-printf("%-5c",st[index].sex);
+printf("%-5c",st[index].sexo);
 printf("%-17s",st[index].carrera);
-printf("%-6.1f",st[index].quizz1);
-printf("%-6.1f",st[index].quizz2);
-printf("%-6.1f",st[index].assigment);
-printf("%-6.1f",st[index].midterm);
-printf("%-7.1f",st[index]. final);
+printf("%-6.1f",st[index].exam1);
+printf("%-6.1f",st[index].exam2);
+printf("%-6.1f",st[index].exam3);
+printf("%-6.1f",st[index].exam4);
+printf("%-7.1f",st[index]. exam5);
 printf("%-4.1f",st[index].total);
 printf("\n");
 
@@ -231,26 +231,26 @@ int main(int argc, char *argv[])
 {
 
 
-student st[20];
-int itemcount=0;
+estudiante st[20];
+int contadordeelement=0;
 
 //mostrar menu
-displaymenu();
-int yourchoice;
+mostrarmenu();
+int eleccion;
 char confirm;
 do
 {
 printf("ingresa tu opcion(1-4):");
-scanf("%d",&yourchoice);
+scanf("%d",&eleccion);
 
-switch(yourchoice){
-case 1:add_rec(st, &itemcount);
+switch(eleccion){
+case 1:agre_regis(st, &contadordeelement);
 	break;
-case 2:delete_rec(st, &itemcount);
+case 2:eliminar_regis(st, &contadordeelement);
 	break;
-case 3:viewall(st, itemcount);
+case 3:vertodoreg(st, contadordeelement);
 	break;
-case 4:find(st, itemcount);
+case 4:encontrar(st, contadordeelement);
 	break;
 default:printf("invalido\n");
 }
