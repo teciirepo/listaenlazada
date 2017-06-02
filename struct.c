@@ -34,7 +34,7 @@ printf("==================================================\n");
 printf(" 4.View all student records\n");
 printf("==================================================\n");
 printf(" 8.Find a student by ID\n");
-printf(" 9.Sort records by TOTAL\n");
+printf("==================================================\n");
 }
 //function to append a new record
 void add_rec(student st[],int *itemcount){
@@ -214,20 +214,7 @@ else printf("The record doesn't exits.\n");
 }
 
 
-//function to sort records by total score
-void bubblesort(student dataset[], int n)
-{
-int i, j;
-for (i = 0; i < n; i++)
-for (j = n - 1; j > i; j--)
-if (dataset[j].total < dataset[j - 1].total )
-{
-student temp = dataset[j];
-dataset[j] = dataset[j - 1];
-dataset[j - 1] = temp;
-}
 
-}
 
 
 
@@ -247,7 +234,7 @@ int yourchoice;
 char confirm;
 do
 {
-printf("Enter your choice(1-9):");
+printf("Enter your choice(1-4):");
 scanf("%d",&yourchoice);
 
 switch(yourchoice){
@@ -255,11 +242,7 @@ case 1:add_rec(st, &itemcount);
 	break;
 case 2:delete_rec(st, &itemcount);
 	break;
-case 4:viewall(st, itemcount);
 	break;
-case 8:find(st, itemcount);
-	break;
-case 9:bubblesort(st, itemcount);
 	break;
 default:printf("invalid\n");
 }
