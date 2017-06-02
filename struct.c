@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//declaring student structure
+//declaracion de la estructura del alumno
 typedef struct
 {
 
@@ -18,7 +18,7 @@ float final;
 float total;
 
 }student;
-//function prototypes
+//funciones principales
 int search(student st[],char id[], int itemcount);
 void clean(student st[],int deleteitem);
 void displayheading();
@@ -45,7 +45,7 @@ printf("\ningresa id del alumno:");
 scanf("%s",&st[*itemcount].stnumber);
 if(search(st,st[*itemcount].stnumber,*itemcount)!=-1)
 {
-printf("This ID already exists\n");
+printf("Este id ya existe\n");
 goto again;
 }
 
@@ -122,8 +122,8 @@ i=i+1;
 
 void displayheading()
 {
-printf("ID NAME             No.Control       SEX     CARRERA           Q1   Q2    As    Mi   Fi   TOTAL \n");
-printf("================================================================================================\n");
+printf("ID NOMBRE             No.Control       SEXO     CARRERA           P1   P2    P3    P4   P5   TOTAL \n");
+printf("===================================================================================================\n");
 }
 
 //function to delete record
